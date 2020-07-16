@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AddToReminiscence Bookmarklet</title>
+    <style>
+        body {font-family: helvetica, sans-serif; max-width: 40em;margin: 1em auto}
+        a {
+            color: #fff;
+            background: #369;
+            padding: 2px 5px;
+            text-decoration: none;
+        }
+        div.note
+        {
+             -moz-border-radius: 6px;
+             -webkit-border-radius: 6px;
+             background-color: #f0f7fb;
+             //background-image: url(../Images/icons/Pencil-48.png);
+             background-position: 9px 0px;
+             background-repeat: no-repeat;
+             border: solid 1px #3498db;
+             border-radius: 6px;
+             line-height: 18px;
+             overflow: hidden;
+             padding: 15px 60px;
+        }
+
+    </style>
+</head>
+<body>
+    {% block content %}
+    {% endblock content %}
+</body>
+</html>
