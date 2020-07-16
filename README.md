@@ -15,9 +15,8 @@ bookmarklet/add-url/ : adds given url to the reminiscence-instance
 ## installation
 
 ``` 
-$ git clone https://github.com/s3h10r/reminiscence-bookmarklet
-$ cd reminiscence-bookmarklet 
-$ cp -dpR ./bookmarklet <path-to-your-reminiscence-sources>
+$ cd <path-to-your-reminiscence-sources>
+$ git clone https://github.com/s3h10r/reminiscence-bookmarklet bookmarklet
 ```
 
 ## configuration
@@ -56,3 +55,10 @@ $ ln -s ../bookmarklet/templates/bookmarklet/ .
 
 after configuration is done restart the reminiscence-instance 
 (or rebuild the reminiscence-container if you're using docker).
+
+## update
+
+``` 
+$ cd <path-to-your-reminiscence-sources>/bookmarklet
+$ git pull
+```

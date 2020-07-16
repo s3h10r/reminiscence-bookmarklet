@@ -1,0 +1,8 @@
+*.log
+*.sqlite3
+*.pyc
+*.swp
+*.vim
+__pycache__/
+logs/
+tmp/
