@@ -13,6 +13,8 @@
 -->
     <p> sends the current page to a Reminiscence instance by a single click.</p>
 
+    <h3> HOWTO - Desktop (here Chromium) </h3>
+
     <p>Drag this to your bookmarks toolbar: <a id="bookmarklet" href="">AddToReminiscence</a></p>
     <script>
         fetch(`{% url 'bookmarklet:get' %}`)
@@ -25,14 +27,70 @@
             text.replace(/\s/g,''));
     });
     </script>
-    <h3> HOWTO - Chromium (Desktop) </h3>
+
     <div class="note">
         <ol>
             <li> Login to your Reminiscence instance </li>
             <li> Make sure your browser displays the Bookmarks Bar by pressing <code>CTRL-Shift-B</code></li>
             <li> Once your bookmarks bar is visible, drag and drop the Bookmarklet-link from above into to your bookmarks toolbar </li>
-            <li> Now you can start archiving sites for your ReminiscenceInstance by a single click (means: ckick the "AddToReminiscence"-bookmark while visiting a URL you want to archive). </li>
+            <li> Now you can start archiving sites with your ReminiscenceInstance by a single click (means: ckick the "AddToReminiscence"-bookmark while visiting a URL you want to archive). </li>
         </ol>
     </div>
 
+    <h3> HOWTO - mobile (Android, iOS) </h3>
+
+    <input type="text" value="js-code comes herein" id="js-snip" size=50 readonly>
+
+    <div class="tooltip">
+    <button onclick="myFunction()" onmouseout="outFunc()">
+      <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
+      Copy to clipboard
+      </button>
+    </div>
+
+    <div class="note">
+    <ol>
+        <li> Login to your Reminiscence instance </li>
+        <li> bookmark this page in your browser (Chrome, Firefox, Safari, ...) </a>
+        <li> click the button "Copy to clipboard"</li>
+        <li> open the bookmark you set in step 2 and edit its URL field: delete its content and paste in the clipboard content. </li>
+        <li> Now you can start archiving sites with your ReminiscenceInstance by just calling the "AddToReminiscence"-bookmark while visiting an URL you want to archive. </li>
+    </ol>
+    </div>
+
+    <script>
+    // copy to clipboard
+    function myFunction() {
+      var jscode = document.getElementById("bookmarklet").href;
+      var copyText = document.getElementById("js-snip");
+      copyText.value = jscode;
+      copyText.select();
+      //copyText.setSelectionRange(0, 99999);
+      document.execCommand('copy')
+
+      var tooltip = document.getElementById("myTooltip");
+      tooltip.innerHTML = "Copied: " + copyText.value;
+    }
+
+    function outFunc() {
+      var tooltip = document.getElementById("myTooltip");
+      tooltip.innerHTML = "Copy to clipboard";
+    }
+    </script>
+
+    <script>
+        window.onload = function() {execOnLoad()};
+        function execOnLoad() {
+          //document.getElementById("js-snip").value = document.getElementById("bookmarklet").href;
+          fetch(`{% url 'bookmarklet:get' %}`)
+          .then(function(response) {
+              return response.text();
+          })
+          .then(function(text) {
+              document.querySelector('#js-snip').
+              setAttribute('value','javascript:' + 
+              text.replace(/\s/g,''));
+          });
+        }
+</script>
 {% endblock content %}

@@ -56,6 +56,11 @@ $ ln -s ../bookmarklet/templates/bookmarklet/ .
 after configuration is done restart the reminiscence-instance 
 (or rebuild the reminiscence-container if you're using docker).
 
+## usage
+
+Visit `https://example.com/bookmarklet` with your favourite browser. Required only once.
+(`https://example.com` has to be changed to the URL of your Reminiscence-instance of course)
+
 ## update
 
 ``` 
