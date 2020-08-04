@@ -37,7 +37,8 @@ def add_to_reminiscence(request, url=None, directory=None):
     """
     if request.user:
         res = _add_url(request)
-    return HttpResponse(json.dumps(res))
+    #return HttpResponse(json.dumps(res))
+    return render(request, 'bookmarklet/add.html', context={'res' : res})
 
 
 def _add_url(request):
@@ -69,13 +70,19 @@ def _add_url(request):
             http = re.match(r'^(?:http)s?://', url)
         else:
             http = None
+        content = {"url": url, "is_media_link": is_media_link, "directory": directory, "status": None}
         if http and directory:
             if addURL.check_dir_and_subdir(usr, directory):
                 dbxs.add_new_url(usr, request, directory, row, is_media_link=is_media_link,
                                  url_name=url, save_favicon=save_favicon)
-                content = {"url": url, "is_media_link": is_media_link, "directory": directory, "status": "added"}
+                content['status'] = "added"
             else:
-                content = {"msg": "Maybe required directory not found. So please create directories before adding url"}
+                content['msg'] = "Maybe required directory not found. So please create directories before adding url"
+                content['status'] = "error"
+        elif http:
+            content['msg'] = "wrong directory? url='{}',directory={}".format(url,directory)
+            content['status'] = "error"
         else:
-            content = {"msg": "wrong url format or directory. url='{}',directory={}".format(url,directory)}
+            content['masg'] = "wrong url format? url='{}',directory={}".format(url,directory)
+            content['status'] = "error"
         return content

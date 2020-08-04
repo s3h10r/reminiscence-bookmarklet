@@ -1,0 +1,28 @@
+{% extends "bookmarklet/base.html" %}
+{% load staticfiles %}
+{% block extra_head %}
+    {% if res.status == "added" %}
+    	<meta http-equiv="refresh" content="5; url='{{res.url}}'" /> {# redirect to bookmarked url in <value-of-content> seconds #}
+    {% endif %}
+{% endblock extra_head %}
+
+{% block content %}
+    <h1>Reminiscence-Bookmarklet</h1>
+
+    {% if res.status == "added" %}
+      <p>
+        yai, URL was successfully added to your archive. <a href="{{res.url}}"> go back </a>.
+      </p>
+    {# TODO load url in 5 secs + button to url #}
+    {% else %}
+      <p>
+        Oh crap! an error occoured. URL was not added to your archive, sry. <a href="{{res.url}}"> go back </a>.
+      </p>
+    {% endif %}
+
+    <h3> debug infos </h3> 
+    <code>
+    {{res}}    
+    </code>
+
+{% endblock content %}
